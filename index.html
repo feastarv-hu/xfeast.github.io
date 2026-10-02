@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Choose a Tournament</title>
+    <meta name="description" content="Choose a tournament to explore its standings, matches, bracket, and analytics.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+<body class="tournament-home">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top glass-nav">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-trophy-fill me-2"></i>UMA ANALYTICS</a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div id="nav" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Tournaments</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container tournament-library">
+        <header class="library-heading">
+            <span class="library-kicker"><i class="bi bi-collection me-2"></i>TOURNAMENT LIBRARY</span>
+        </header>
+
+        <section class="tournament-grid" aria-label="Available tournaments">
+            <article class="tournament-card tournament-card-active">
+                <div class="tournament-card-top">
+                    <span class="tournament-status"><span></span>DATA AVAILABLE</span>
+                    <i class="bi bi-trophy tournament-mark" aria-hidden="true"></i>
+                </div>
+                <div class="tournament-card-copy">
+                    <p id="tournamentSeason" class="tournament-season">SEASON 03</p>
+                    <h2 id="tournamentName">Tournament</h2>
+                    <p id="tournamentFormat" class="tournament-format">Tournament format</p>
+                </div>
+                <div class="tournament-card-bottom">
+                    <span><i class="bi bi-people me-2"></i><b id="tournamentPlayers">—</b> players · <b id="tournamentTeams">—</b> teams</span>
+                    <a href="uclseason3/dashboard.html" class="tournament-open" aria-label="Open tournament dashboard"><i class="bi bi-arrow-up-right"></i></a>
+                </div>
+            </article>
+
+            <article class="tournament-card tournament-card-pending" aria-disabled="true">
+                <div class="tournament-card-top">
+                    <span class="tournament-status"><span></span>NOT CONFIGURED</span>
+                    <i class="bi bi-plus-circle tournament-mark" aria-hidden="true"></i>
+                </div>
+                <div class="tournament-card-copy">
+                    <p class="tournament-season">TOURNAMENT 02</p>
+                    <h2>New event</h2>
+                    <p class="tournament-format">Tournament data has not been added.</p>
+                </div>
+                <div class="tournament-card-bottom"><span><i class="bi bi-lock me-2"></i>Unavailable</span></div>
+            </article>
+
+            <article class="tournament-card tournament-card-pending" aria-disabled="true">
+                <div class="tournament-card-top">
+                    <span class="tournament-status"><span></span>NOT CONFIGURED</span>
+                    <i class="bi bi-plus-circle tournament-mark" aria-hidden="true"></i>
+                </div>
+                <div class="tournament-card-copy">
+                    <p class="tournament-season">TOURNAMENT 03</p>
+                    <h2>New event</h2>
+                    <p class="tournament-format">Tournament data has not been added.</p>
+                </div>
+                <div class="tournament-card-bottom"><span><i class="bi bi-lock me-2"></i>Unavailable</span></div>
+            </article>
+        </section>
+    </main>
+
+    <footer class="border-top py-4 mt-4">
+        <div class="container text-secondary small">Uma Tournament Analytics · Select an event to continue</div>
+    </footer>
+    <script src="data/tournament.js"></script>
+    <script>
+        (() => {
+            const data = tournamentData;
+            document.getElementById("tournamentName").textContent = data.tournament.name;
+            document.getElementById("tournamentSeason").textContent = data.tournament.season.toUpperCase();
+            document.getElementById("tournamentFormat").textContent = data.tournament.format;
+            document.getElementById("tournamentPlayers").textContent = data.players.length;
+            document.getElementById("tournamentTeams").textContent = new Set(data.players.map(player => player.team).filter(Boolean)).size;
+        })();
+    </script>
+</body>
+
+</html>
